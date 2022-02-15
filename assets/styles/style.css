@@ -501,7 +501,7 @@ input[type=number] {
 .caixa-quizz{
   width: 90vw;
   margin: 0 auto;
-  cursor: pointer;
+  cursor: pointer; 
 }
 .corpo-pagina-criacao{
   justify-content: center; 
