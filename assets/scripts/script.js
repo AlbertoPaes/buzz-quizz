@@ -1,47 +1,51 @@
 const URL_BASE = "https://mock-api.driven.com.br/api/v4/buzzquizz";
 let porcentagemDeAcertos = 0;
 
-
-function disporQuizes(){
-  const promessa = axios.get(`${URL_BASE}/quizzes`);
-  promessa.then( (resposta) => {
-    const listaQuizes = resposta.data;
-    const caixaQuizes = document.querySelector(".caixa-quizz");
-    listaQuizes.map( quiz => 
-      caixaQuizes.innerHTML +=
-      `<div class="quizzes-de-outros" onclick='irPraTelaQuiz(${quiz.id})' data-identifier="quizz-card">
+function disporQuizes() {
+	const promessa = axios.get(`${URL_BASE}/quizzes`);
+	promessa.then((resposta) => {
+		console.log(resposta.data);
+		const listaQuizes = resposta.data;
+		const caixaQuizes = document.querySelector(".caixa-quizz");
+		listaQuizes.map(
+			(quiz) =>
+				(caixaQuizes.innerHTML += `<div class="quizzes-de-outros" onclick='irPraTelaQuiz(${quiz.id})' data-identifier="quizz-card">
         <img src="${quiz.image}"/>
         <div class="sombra-imagem"></div>
         <span>${quiz.title}</span>
-      </div>`
-    );
-  });
+      </div>`)
+		);
+	});
 
-  promessa.catch(erroAxios);
+	promessa.catch(erroAxios);
 }
 
-function irPraTelaQuiz(id){
-  const telaInicial = document.querySelector(".corpo-pagina-inicial");
-  const quizz = axios.get(`${URL_BASE}/quizzes/${id}`)
+function irPraTelaQuiz(id) {
+	const telaInicial = document.querySelector(".corpo-pagina-inicial");
+	const quizz = axios.get(`${URL_BASE}/quizzes/${id}`);
 
-  telaInicial.classList.add("hidden");
-  quizz.then( (resposta) => {
-    const quizAtual = resposta.data;
-    const corpo = document.querySelector("body");
-    let caixaDeRespostas = "";
+	telaInicial.classList.add("hidden");
+	quizz.then((resposta) => {
+		const quizAtual = resposta.data;
+		const corpo = document.querySelector("body");
+		let caixaDeRespostas = "";
 
-    quizAtual.questions.map( (item) =>
-    caixaDeRespostas +=
-    `<div class="container-pergunta-individual">
-        <div class="container-titulo-pergunta-individual" style="background-color: ${item.color};">
-            <h2 style=" color: ${item.color >= '#7FFFFF' ? 'black': 'white'}">${item.title}</h2>
+		quizAtual.questions.map(
+			(item) =>
+				(caixaDeRespostas += `<div class="container-pergunta-individual">
+        <div class="container-titulo-pergunta-individual" style="background-color: ${
+					item.color
+				};">
+            <h2 style=" color: ${
+							item.color >= "#7FFFFF" ? "black" : "white"
+						}">${item.title}</h2>
         </div>
         <div class="container-respostas-pergunta-individual">
         </div>        
-    </div>`
-    )
+    </div>`)
+		);
 
-    corpo.innerHTML += `
+		corpo.innerHTML += `
     <div class="pagina-de-um-quizz">
       <div class="container-foto-de-capa-quizz">
           <img src="${quizAtual.image}"/>
@@ -66,12 +70,20 @@ function irPraTelaQuiz(id){
           </button>
       </div>
     </div> 
-    `
-  })
+    `;
+	});
+}
+function mostrarTelaDeCriacao() {
+	const telaInicial = document.querySelector(".corpo-pagina-inicial");
+	const telaCriacao = document.querySelector(".tela-infos-basicas");
 
+	telaCriacao.classList.remove("hidden");
+	telaInicial.classList.add("hidden");
 }
 
-function erroAxios(){
-  alert("Houve uma falha na comunicação com o servidor, tente novamente mais tarde");
-  window.location.reload();
+function erroAxios() {
+	alert(
+		"Houve uma falha na comunicação com o servidor, tente novamente mais tarde"
+	);
+	window.location.reload();
 }
