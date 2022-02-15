@@ -64,7 +64,7 @@ function telaDeQuizz(resposta){
         <button class="reiniciar-quizz" onclick="reiniciarQuizz(${quizzAtual.id})">
             Reiniciar Quizz
         </button>
-        <button  id='fullReset' class="voltar-home" onclick="voltarTela('.corpo-pagina-inicial', '.pagina-de-um-quizz')">
+        <button  id='fullReset' class="voltar-home"  onclick="voltarTela('.corpo-pagina-inicial', '.pagina-de-um-quizz')">
             Voltar para home
         </button>
     </div>
@@ -72,22 +72,24 @@ function telaDeQuizz(resposta){
   `
 }
 
-function exibirRespostasQuizz(respostas,qtdDeCadaResposta){
-  const ARRAY_DE_RESPOSTAS = Array(respostas.length).fill("");
-  console.log(ARRAY_DE_RESPOSTAS);
+function voltarHome(){
+    document.location.reload(true);
+}
 
-  const NOVO_ARRAY_RESPOSTAS = ARRAY_DE_RESPOSTAS.map( (item) => {
-    `<div class="container-resposta-indivual ${(item.isCorrectAnswer === true) ? "resposta-correta" : "resposta-errada"}" onclick="selecionarResposta(this, ${qtdDeCadaResposta})" data-identifier="answer">
+function exibirRespostasQuizz(respostas,qtdDeCadaResposta){
+  let ARRAY_RESPOSTAS = [];
+  console.log(respostas);
+
+  respostas.forEach( (item) => {
+    ARRAY_RESPOSTAS.push(
+    `<div class="container-resposta-indivual ${(item.isCorrectAnswer === true) ? "resposta-correta" : "resposta-errada"}        "onclick="selecionarResposta(this, ${qtdDeCadaResposta})" data-identifier="answer">
             <img src="${item.image}"/>
             <span>${item.text}</span>
-    </div>`
+     </div>`);
   });
-  console.log(NOVO_ARRAY_RESPOSTAS);
-
-  NOVO_ARRAY_RESPOSTAS.sort(randomizador);
-  for (let j = 0; j < respostas.length; j++) {
-    retornoString += respostas[j];
-  }
+  console.log(ARRAY_RESPOSTAS);
+  ARRAY_RESPOSTAS.sort(randomizador);
+  return ARRAY_RESPOSTAS;
 
 }
 
