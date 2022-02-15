@@ -24,7 +24,7 @@
   justify-content: space-around;
   flex-direction: column;
   align-items: center;
-  width: 100vw;
+  width: 100%;
   height: auto;
   margin-top: 10px;
 }
@@ -98,10 +98,10 @@
 
 }
 .caixa-quizz{
+  width: 1050px;
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
-  width: 1050px;
   
 }
 .quizzes-de-outros{
@@ -289,7 +289,7 @@ outline: none;
 }
 /*:::::::::::Fim da Tela de Criação de Quizz 3::::::::::*/
 
-/*::::::::::Página de um Quizz (joão)::::::::::*/
+/*::::::::::Página de um Quizz ::::::::::*/
 .pagina-de-um-quizz{
   width: 100%;
   display: flex;
@@ -501,6 +501,7 @@ input[type=number] {
 .caixa-quizz{
   width: 90vw;
   margin: 0 auto;
+  cursor: pointer;
 }
 .corpo-pagina-criacao{
   justify-content: center; 
