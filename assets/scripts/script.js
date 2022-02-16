@@ -2,9 +2,11 @@ const URL_BASE = "https://mock-api.driven.com.br/api/v4/buzzquizz";
 let porcentagemDeAcertos = 0;
 
 function disporQuizes() {
+	mostrarLoading();
+
 	const promessa = axios.get(`${URL_BASE}/quizzes`);
 	promessa.then((resposta) => {
-		console.log(resposta.data);
+		removerLoading();
 		const listaQuizes = resposta.data;
 		const caixaQuizes = document.querySelector(".caixa-quizz");
 		listaQuizes.map(
@@ -13,10 +15,10 @@ function disporQuizes() {
         <img src="${quiz.image}"/>
         <div class="sombra-imagem"></div>
         <span>${quiz.title}</span>
-      </div>`)
-		);
-	});
-
+				</div>`)
+				);
+			});
+			
 	promessa.catch(erroAxios);
 }
 
@@ -106,14 +108,22 @@ function exibirRespostasQuizz(respostas, qtdDeCadaResposta) {
 function selecionarResposta(respostaSelecionada,qtdDeRespostas){
 	const divPai = respostaSelecionada.parentNode;
 	const divIrmas = divPai.children;
-	const divAvo = divPai.parentNode;
+	//const divAvo = divPai.parentNode;
+	const respostasErradas = divPai.querySelectorAll(".resposta-errada");
+	console.log(respostasErradas);
+	const respostaCorreta = divPai.querySelector(".resposta-correta");
 
 	Array.from(divIrmas).forEach( (item) => {
 		item.classList.add("nao-selecionado");
 		item.removeAttribute("onclick");
 	});
 
+	Array.from(respostasErradas).forEach( (item) => {
+		item.classList.add("vermelho");
+	})
+
 	respostaSelecionada.classList.remove("nao-selecionado");
+	respostaCorreta.classList.add("verde");
 }
 
 function embaralharRespostas() {
@@ -125,4 +135,75 @@ function erroAxios() {
 		"Houve uma falha na comunicação com o servidor"
 	);
 	window.location.reload();
+}
+
+function mostrarLoading(){
+	const telaLoading = document.querySelector(".tela-loading");
+	telaLoading.innerHTML = Loading();
+}
+
+function removerLoading(){
+	const telaLoading = document.querySelector(".tela-loading");
+	telaLoading.innerHTML = '';
+}
+
+function Loading(){
+	return `
+    <div class="loading">
+      <?xml version="1.0" encoding="utf-8"?>
+      <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" style="display: block; shape-rendering: auto;" width="100px" height="100px" viewBox="0 0 100 100" preserveAspectRatio="xMidYMid">
+        <g transform="rotate(0 50 50)">
+          <rect x="47" y="24" rx="3" ry="6" width="6" height="12" fill="#ec362d">
+            <animate attributeName="opacity" values="1;0" keyTimes="0;1" dur="1s" begin="-0.9166666666666666s" repeatCount="indefinite"></animate>
+          </rect>
+        </g><g transform="rotate(30 50 50)">
+          <rect x="47" y="24" rx="3" ry="6" width="6" height="12" fill="#ec362d">
+            <animate attributeName="opacity" values="1;0" keyTimes="0;1" dur="1s" begin="-0.8333333333333334s" repeatCount="indefinite"></animate>
+          </rect>
+        </g><g transform="rotate(60 50 50)">
+          <rect x="47" y="24" rx="3" ry="6" width="6" height="12" fill="#ec362d">
+            <animate attributeName="opacity" values="1;0" keyTimes="0;1" dur="1s" begin="-0.75s" repeatCount="indefinite"></animate>
+          </rect>
+        </g><g transform="rotate(90 50 50)">
+          <rect x="47" y="24" rx="3" ry="6" width="6" height="12" fill="#ec362d">
+            <animate attributeName="opacity" values="1;0" keyTimes="0;1" dur="1s" begin="-0.6666666666666666s" repeatCount="indefinite"></animate>
+          </rect>
+        </g><g transform="rotate(120 50 50)">
+          <rect x="47" y="24" rx="3" ry="6" width="6" height="12" fill="#ec362d">
+            <animate attributeName="opacity" values="1;0" keyTimes="0;1" dur="1s" begin="-0.5833333333333334s" repeatCount="indefinite"></animate>
+          </rect>
+        </g><g transform="rotate(150 50 50)">
+          <rect x="47" y="24" rx="3" ry="6" width="6" height="12" fill="#ec362d">
+            <animate attributeName="opacity" values="1;0" keyTimes="0;1" dur="1s" begin="-0.5s" repeatCount="indefinite"></animate>
+          </rect>
+        </g><g transform="rotate(180 50 50)">
+          <rect x="47" y="24" rx="3" ry="6" width="6" height="12" fill="#ec362d">
+            <animate attributeName="opacity" values="1;0" keyTimes="0;1" dur="1s" begin="-0.4166666666666667s" repeatCount="indefinite"></animate>
+          </rect>
+        </g><g transform="rotate(210 50 50)">
+          <rect x="47" y="24" rx="3" ry="6" width="6" height="12" fill="#ec362d">
+            <animate attributeName="opacity" values="1;0" keyTimes="0;1" dur="1s" begin="-0.3333333333333333s" repeatCount="indefinite"></animate>
+          </rect>
+        </g><g transform="rotate(240 50 50)">
+          <rect x="47" y="24" rx="3" ry="6" width="6" height="12" fill="#ec362d">
+            <animate attributeName="opacity" values="1;0" keyTimes="0;1" dur="1s" begin="-0.25s" repeatCount="indefinite"></animate>
+          </rect>
+        </g><g transform="rotate(270 50 50)">
+          <rect x="47" y="24" rx="3" ry="6" width="6" height="12" fill="#ec362d">
+            <animate attributeName="opacity" values="1;0" keyTimes="0;1" dur="1s" begin="-0.16666666666666666s" repeatCount="indefinite"></animate>
+          </rect>
+        </g><g transform="rotate(300 50 50)">
+          <rect x="47" y="24" rx="3" ry="6" width="6" height="12" fill="#ec362d">
+            <animate attributeName="opacity" values="1;0" keyTimes="0;1" dur="1s" begin="-0.08333333333333333s" repeatCount="indefinite"></animate>
+          </rect>
+        </g><g transform="rotate(330 50 50)">
+          <rect x="47" y="24" rx="3" ry="6" width="6" height="12" fill="#ec362d">
+            <animate attributeName="opacity" values="1;0" keyTimes="0;1" dur="1s" begin="0s" repeatCount="indefinite"></animate>
+          </rect>
+        </g>
+      </svg>
+    
+      <span>Carregando</span>
+    </div>
+  `;
 }

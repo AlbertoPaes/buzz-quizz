@@ -96,6 +96,15 @@
 	font-weight: 700;
 	margin-bottom: 12px;
 }
+.loading {
+	min-height: 77vh;
+
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	gap: 24px;
+}
 .caixa-quizz {
 	width: 1050px;
 	display: flex;
