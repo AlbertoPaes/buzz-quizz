@@ -88,26 +88,41 @@ function voltarHome() {
 
 function exibirRespostasQuizz(respostas, qtdDeCadaResposta) {
 	let ARRAY_RESPOSTAS = [];
-	console.log(respostas);
 
 	respostas.forEach((item) => {
 		ARRAY_RESPOSTAS.push(
 			`<div class="container-resposta-indivual ${
 				item.isCorrectAnswer === true ? "resposta-correta" : "resposta-errada"
-			}        "onclick="selecionarResposta(this, ${qtdDeCadaResposta})" data-identifier="answer">
+			}     "onclick="selecionarResposta(this, ${qtdDeCadaResposta})" data-identifier="answer">
             <img src="${item.image}"/>
             <span>${item.text}</span>
      </div>`
 		);
 	});
-	console.log(ARRAY_RESPOSTAS);
-	ARRAY_RESPOSTAS.sort(randomizador);
+	ARRAY_RESPOSTAS.sort(embaralharRespostas);
 	return ARRAY_RESPOSTAS;
+}
+
+function selecionarResposta(respostaSelecionada,qtdDeRespostas){
+	const divPai = respostaSelecionada.parentNode;
+	const divIrmas = divPai.children;
+	const divAvo = divPai.parentNode;
+
+	Array.from(divIrmas).forEach( (item) => {
+		item.classList.add("nao-selecionado");
+		item.removeAttribute("onclick");
+	});
+
+	respostaSelecionada.classList.remove("nao-selecionado");
+}
+
+function embaralharRespostas() {
+	return Math.random() - 0.5;
 }
 
 function erroAxios() {
 	alert(
-		"Houve uma falha na comunicação com o servidor, tente novamente mais tarde"
+		"Houve uma falha na comunicação com o servidor"
 	);
 	window.location.reload();
 }

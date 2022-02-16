@@ -1,0 +1,31 @@
+//Arquivo temporário para comentários do projeto
+
+!--               Alberto               --!
+
+Requisito: Comportamento de Respostas
+
+Função que seleciona a resposta:
+      "onclick="selecionarResposta(this, ${qtdDeCadaResposta})"
+
+Div pai da div que executa a função selecionarResposta:
+      <div class="container-respostas-pergunta-individual">
+        ${exibirRespostasQuizz(item.answers, item.length)}
+      </div>   
+
+Div avô da div que executa a função exibirRespostasQuizz:
+      (caixaDeRespostas += `<div class="container-pergunta-individual">
+    <div class="container-titulo-pergunta-individual" style="background-color: ${
+      item.color
+    };">
+      <h2 style=" color: ${item.color >= "#7FFFFF" ? "black" : "white"}">${
+        item.title
+      }</h2>
+    </div>
+    <div class="container-respostas-pergunta-individual">
+      ${exibirRespostasQuizz(item.answers, item.length)}
+    </div>        
+    </div>`)
+
+
+!--                                     --!
+
