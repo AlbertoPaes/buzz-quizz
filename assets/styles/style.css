@@ -203,7 +203,7 @@
 /*:::::::::::Fim da Tela de Criação de Quizz 1::::::::::*/
 
 /*:::::::::::Tela de Criação de Quizz 2::::::::::*/
-.tela-perguntas {
+.corpo-pagina-criacao {
 	width: 100%;
 	min-height: 100vh;
 	display: flex;
@@ -291,6 +291,60 @@
 /*:::::::::::Fim da Tela de Criação de Quizz 2::::::::::*/
 
 /*:::::::::::Tela de Criação de Quizz 3::::::::::*/
+.corpo-pagina-criacao {
+	width: 100%;
+}
+
+.corpo-pagina-criacao .conteudo-criacao {
+	width: 100%;
+	height: 80vh;
+}
+
+.caixa-input {
+	width: 100%;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	margin-top: 12px;
+}
+.container-form {
+	width: 100%;
+}
+
+.caixa-input input {
+	height: 46px;
+	width: 95%;
+	margin-bottom: 10px;
+	font-size: 19px;
+	font-style: italic;
+	border: 1px solid #d1d1d1;
+	border-radius: 5px;
+	padding-left: 10px;
+}
+
+.caixa-input .descricao {
+	width: 95%;
+	height: 170px;
+	padding-left: 10px;
+	min-height: 46px;
+	font-size: 19px;
+	font-style: italic;
+	font-family: Roboto;
+	margin-bottom: 10px;
+	border-radius: 5px;
+	border: 1 solid #d1d1d1;
+}
+
+.caixa-input .descricao::placeholder {
+	font-size: 19px;
+	font-family: Roboto;
+	font-style: italic;
+}
+
+.caixa-input input::placeholder,
+.caixa-input .descricao::placeholder {
+	margin-left: 20px;
+}
 
 /*:::::::::::Fim da Tela de Criação de Quizz 3::::::::::*/
 
