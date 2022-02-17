@@ -38,7 +38,7 @@ function mostrarTelaDePerguntas(perguntas) {
 
 	for (let i = 0; i < parseInt(perguntas); i++) {
 		containerPerguntas += `
-		<div class="caixa-adicao" onclick="editarPergunta(this)">
+		<div class="caixa-adicao" onclick="editar(this)">
 			<h3>Pergunta ${i + 1}</h3>
 			<ion-icon class = "pencil" name="create-outline"></ion-icon>
 			<div class = "container-form-perguntas hidden">
@@ -48,8 +48,7 @@ function mostrarTelaDePerguntas(perguntas) {
 						id = "input-box"
 						class="texto-pergunta caixa-input-pergunta"
 						name = "texto_pergunta"
-						type = "text"
-						minlenght = "20"
+						parseInt(dadosBasicosCriacao.niveis)						minlenght = "20"
 						required
 					/>
 					<input 
@@ -152,7 +151,7 @@ function mostrarTelaDePerguntas(perguntas) {
 	<p class = "instrucao">Crie suas perguntas</p>
 	<div class = "conteudo-criacao">
 		<form
-		onsubmit = "verificaPerguntas(); return false"
+		onsubmit = "verificarPerguntas(); return false"
 		accept-charset="utf-8"
 		name="info-perguntas" >
 
@@ -171,7 +170,7 @@ function mostrarTelaDePerguntas(perguntas) {
 	`;
 }
 
-function editarPergunta(divPergunta) {
+function editar(div) {
 	const ativo = document.querySelector(".ativo");
 	if (ativo !== null) {
 		ativo.classList.remove("ativo");
@@ -179,13 +178,13 @@ function editarPergunta(divPergunta) {
 		ativo.children[2].classList.add("hidden");
 		ativo.children[0].classList.remove("margem");
 	}
-	divPergunta.children[0].classList.add("margem");
-	divPergunta.children[1].classList.add("hidden");
-	divPergunta.children[2].classList.remove("hidden");
-	divPergunta.classList.add("ativo");
+	div.children[0].classList.add("margem");
+	div.children[1].classList.add("hidden");
+	div.children[2].classList.remove("hidden");
+	div.classList.add("ativo");
 }
 
-function verificaPerguntas() {
+function verificarPerguntas() {
 	console.log("entrou");
 	const perguntas = [...document.querySelectorAll(".container-form-perguntas")];
 	console.log(perguntas);
@@ -224,9 +223,108 @@ function verificaPerguntas() {
 }
 
 function mostrarTelaDeNiveis(niveis) {
-	console.log(dadosQuizz.questions);
+	console.log(niveis);
 	const telaPerguntas = document.querySelector(".tela-perguntas");
 	const telaNiveis = document.querySelector(".tela-niveis");
 	telaPerguntas.classList.add("hidden");
 	telaNiveis.classList.remove("hidden");
+
+	let containerNiveis = "";
+	for (let i = 0; i < parseInt(niveis); i++) {
+		console.log(i + 1);
+		containerNiveis += `
+		<div class="caixa-adicao" onclick="editar(this)">
+			<h3>Nivel ${i + 1}</h3>
+			<ion-icon class = "pencil" name="create-outline"></ion-icon>
+			<div class = "container-form hidden">
+				<div class = "caixa-input">
+					<input 
+						placeholder = "Titulo do nível"
+						id = "titulo-nivel"
+						name = "titulo_nivel"
+						type = "text"
+						minlenght = "10"
+						required
+					/>
+					<input 
+						placeholder = "% de acerto mínima"
+						id = "porcentagem-acerto"
+						name = "porcentagem_de_acerto_minima"
+						type = "number"
+						min = "0"
+						max = "100"
+						required
+					/>
+					<input
+						placeholder = "URL da imagem do nível"
+						id = "imagem-nivel" 
+						name = "url_imagem_nivel"
+						type = "url"
+						required
+					/>
+					<textarea class ="descricao" placeholder = "Descrição do nível" id = "descricao-nivel" name = "descricao_nivel" minlength = "30"  type = "text" required></textarea>
+				
+				</div>
+			</div>
+		</div>
+	`;
+	}
+
+	telaNiveis.innerHTML = `
+	<p class = "instrucao">Agora, decida os níveis!</p>
+	<div class = "conteudo-criacao">
+		<form
+		onsubmit = "verificarNiveis(); return false"
+		accept-charset="utf-8"
+		name="info-perguntas" >
+			${containerNiveis}		
+			<button type="submit" class="botao-prosseguir">
+				<p class="texto-botao-prosseguir">
+					Finalizar Quizz
+				</p>
+			</button>
+		</form>
+	</div>	
+	`;
+	console.log(telaNiveis.innerHTML);
+}
+
+function verificarNiveis() {
+	const niveis = [...document.querySelectorAll(".container-form")];
+
+	niveis.forEach((nivel) => {
+		let min = 0;
+		const dadosNiveis = {
+			title: nivel.children[0].children[0].value,
+			image: nivel.children[0].children[2].value,
+			text: nivel.children[0].children[3].value,
+			minValue: parseInt(nivel.children[0].children[1].value),
+		};
+		dadosQuizz.levels.push(dadosNiveis);
+	});
+	enviarQuizz(dadosBasicosCriacao.imagem);
+}
+
+function enviarQuizz(url) {
+	const telaFinal = document.querySelector(".tela-final");
+	const telaNiveis = document.querySelector(".tela-niveis");
+	telaNiveis.classList.add("hidden");
+	telaFinal.classList.remove("hidden");
+
+	dadosQuizz.questions.map((pergunta) => {
+		const respostas = pergunta.answers.filter((resposta) => {
+			if (resposta.text === "") {
+				return false;
+			} else {
+				return true;
+			}
+		});
+		pergunta.answers = respostas;
+	});
+
+	const niveis = dadosQuizz.levels;
+	if (niveis[0].minValue !== 0) {
+		niveis[0].minValue = 0;
+	}
+	console.log(dadosQuizz);
 }
