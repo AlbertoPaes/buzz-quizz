@@ -27,5 +27,48 @@ Div avô da div que executa a função exibirRespostasQuizz:
     </div>`)
 
 
+To register a scroll event handler, you call the addEventListener() method on the target element, like this:
+  targetElement.addEventListener('scroll', (event) => {
+      // handle the scroll event 
+  });
+
+or assign an event handler to the onscroll property of the target element:
+  targetElement.onscroll = (event) => {
+    // handle the scroll event
+};
+
+Scrolling the document
+Typically, you handle the scroll events on the window object to handle the scroll of the whole webpage.
+
+The following shows how to attach an event handler to the scroll event of a page:
+  window.addEventListener('scroll',(event) => {
+      console.log('Scrolling...');
+  });
+
+Or you can use the onscroll property on the window object:
+  window.onscroll = function(event) {
+      //
+  };
+
+It is much better to keep the scroll event handler lightweight and execute it every N milliseconds by using a timer.You should use the following code:
+
+let scrolling = false;
+
+window.scroll = () => {
+    scrolling = true;
+};
+
+setInterval(() => {
+    if (scrolling) {
+        scrolling = false;
+        // place the scroll handling logic here
+    }
+},300);
+
+How it works:
+
+- First, set the scrolling flag to false. If the scroll event fires set the scrolling flag to true inside the scroll event handler.
+- Then, execute the scroll event handler using the setInterval() every 300 milliseconds if the scroll events have fired.
+
 !--                                     --!
 
