@@ -30,6 +30,7 @@
 }
 .criar-quizz {
 	display: flex;
+	flex-direction: column;
 	flex-wrap: wrap;
 	justify-content: center;
 	align-items: center;
@@ -38,22 +39,13 @@
 	border-radius: 5px;
 	border: 1px dashed #d5d5d5;
 	margin-bottom: 110px;
+	margin-top: 79px;
 }
-.corpo-pagina-inicial > .botao-criacao {
-	display: flex;
-	flex-wrap: wrap;
-	justify-content: flex-start;
-	align-items: center;
-	align-self: flex-center;
-	width: 1051px;
-	margin-top: 50px;
 
-	font-family: Roboto;
+.criar-quizz p {
+	color: #b9b9b9;
 	font-size: 20px;
-	font-style: normal;
-	font-weight: 700;
-	line-height: 23px;
-	letter-spacing: 0em;
+	width: 60%;
 	text-align: center;
 }
 .criar-quizz > .botao-criacao {
@@ -61,6 +53,15 @@
 	flex-direction: column;
 	justify-content: center;
 	align-items: center;
+	margin-top: 40px;
+	padding: 10px 15px;
+	font-size: 21px;
+	font-weight: 400;
+	color: #ec362d;
+	background-color: #fafafa;
+	border: 1px dashed #ec362d;
+	border-radius: 50px;
+	cursor: pointer;
 }
 .aviso-quizz {
 	font-size: 20px;
@@ -138,9 +139,9 @@
 	z-index: 1;
 }
 /*:::::::::::Tela de Criação de Quizz 1::::::::::*/
-.tela-infos-basicas {
+.corpo-pagina-criacao {
 	width: 100%;
-	min-height: 100vh;
+	min-height: calc(100vh - 69px);
 	display: flex;
 	flex-direction: column;
 	align-items: center;
@@ -153,19 +154,11 @@
 	font-size: 20px;
 	margin-top: 37px;
 }
-
-.conteudo-criacao {
-	display: flex;
-	flex-direction: column;
-	width: 100%;
-	background-color: #fafafa;
-}
-
 .dados-quizz_1 {
 	display: flex;
 	flex-direction: column;
 	background-color: #fff;
-	width: 100%;
+	width: 600px;
 	height: 256px;
 	justify-content: center;
 	align-items: center;
@@ -182,12 +175,6 @@
 	border-radius: 5px;
 }
 
-.container-botao {
-	width: 100%;
-	display: flex;
-	justify-content: center;
-}
-
 .botao-prosseguir {
 	background-color: #ec362d;
 	border-radius: 15px;
@@ -198,24 +185,17 @@
 	border: none;
 	outline: none;
 	margin-top: 29px;
+	cursor: pointer;
 }
 
 /*:::::::::::Fim da Tela de Criação de Quizz 1::::::::::*/
 
 /*:::::::::::Tela de Criação de Quizz 2::::::::::*/
-.corpo-pagina-criacao {
-	width: 100%;
-	min-height: 100vh;
-	display: flex;
-	flex-direction: column;
-	align-items: center;
-	background-color: #fafafa;
-	gap: 29px;
-}
 
 .caixa-adicao {
+	cursor: pointer;
 	display: flex;
-	width: 100%;
+	width: 600px;
 	min-height: 74px;
 	justify-content: space-between;
 	align-items: center;
@@ -239,8 +219,8 @@
 }
 
 .tela-perguntas .conteudo-criacao .botao-prosseguir {
-	width: 80%;
-	margin: 20px auto 0 auto;
+	width: 350px;
+	margin: 20px auto 50px auto;
 }
 .container-form-perguntas {
 	width: 100%;
@@ -271,6 +251,7 @@
 
 .container-form-perguntas div input {
 	width: 95%;
+	padding-left: 10px;
 	height: 46px;
 	margin-bottom: 10px;
 	font-size: 19px;
@@ -291,13 +272,9 @@
 /*:::::::::::Fim da Tela de Criação de Quizz 2::::::::::*/
 
 /*:::::::::::Tela de Criação de Quizz 3::::::::::*/
-.corpo-pagina-criacao {
-	width: 100%;
-}
 
 .corpo-pagina-criacao .conteudo-criacao {
 	width: 100%;
-	height: 80vh;
 }
 
 .caixa-input {
@@ -335,6 +312,10 @@
 	border: 1 solid #d1d1d1;
 }
 
+.tela-niveis .botao-prosseguir {
+	font-family: Roboto;
+}
+
 .caixa-input .descricao::placeholder {
 	font-size: 19px;
 	font-family: Roboto;
@@ -347,6 +328,48 @@
 }
 
 /*:::::::::::Fim da Tela de Criação de Quizz 3::::::::::*/
+/*:::::::::::Tela de Finalização de Criação de Quizz:::::::::*/
+
+.tela-final .container-imagem {
+	width: 500px;
+	height: auto;
+	position: relative;
+	cursor: pointer;
+}
+.tela-final .container-imagem img {
+	width: 100%;
+	height: auto;
+	border-radius: 5px;
+}
+.sombra-imagem {
+	width: 100%;
+	height: auto;
+	border-radius: 5px;
+	box-shadow: inset 0 -50px 60px rgba(0, 0, 0, 0.9);
+	position: absolute;
+	top: 0;
+}
+.container-imagem span {
+	position: absolute;
+	bottom: 20px;
+	left: 15px;
+	color: white;
+	z-index: 1;
+}
+.botao-voltar {
+	cursor: pointer;
+	font-family: Roboto;
+	font-size: 18px;
+	font-weight: 400;
+	color: #818181;
+}
+
+.tela-final .botao-prosseguir {
+	font-family: Roboto;
+	margin-top: 0;
+}
+
+/*:::::::::::Fim da Tela de Finalização de Criação de Quizz:::::::::*/
 
 /*::::::::::Página de um Quizz ::::::::::*/
 .pagina-de-um-quizz {
@@ -642,5 +665,23 @@ input[type="number"] {
 	}
 	.hidden {
 		display: none;
+	}
+
+	.dados-quizz_1 {
+		width: 100%;
+	}
+
+	.caixa-adicao {
+		width: 100%;
+	}
+	.instrucao {
+		font-size: 23px;
+	}
+}
+
+@media (max-width: 500px) {
+	.tela-final .container-imagem {
+		width: 90%;
+		height: auto;
 	}
 }

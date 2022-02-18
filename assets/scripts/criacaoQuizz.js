@@ -1,6 +1,6 @@
 let dadosBasicosCriacao;
-
 let dadosQuizz;
+let listaIds = [];
 
 function verificarCriacao_1() {
 	const criacaoQuizzTitulo = document.querySelector(".criacao-titulo").value;
@@ -12,7 +12,7 @@ function verificarCriacao_1() {
 		".criacao-quantidade-niveis"
 	).value;
 	dadosQuizz = {
-		tittle: criacaoQuizzTitulo,
+		title: criacaoQuizzTitulo,
 		image: criacaoQuizzImg,
 		questions: [],
 		levels: [],
@@ -48,7 +48,7 @@ function mostrarTelaDePerguntas(perguntas) {
 						id = "input-box"
 						class="texto-pergunta caixa-input-pergunta"
 						name = "texto_pergunta"
-						parseInt(dadosBasicosCriacao.niveis)						minlenght = "20"
+						minlenght = "20"
 						required
 					/>
 					<input 
@@ -286,14 +286,12 @@ function mostrarTelaDeNiveis(niveis) {
 		</form>
 	</div>	
 	`;
-	console.log(telaNiveis.innerHTML);
 }
 
 function verificarNiveis() {
 	const niveis = [...document.querySelectorAll(".container-form")];
 
 	niveis.forEach((nivel) => {
-		let min = 0;
 		const dadosNiveis = {
 			title: nivel.children[0].children[0].value,
 			image: nivel.children[0].children[2].value,
@@ -306,11 +304,6 @@ function verificarNiveis() {
 }
 
 function enviarQuizz(url) {
-	const telaFinal = document.querySelector(".tela-final");
-	const telaNiveis = document.querySelector(".tela-niveis");
-	telaNiveis.classList.add("hidden");
-	telaFinal.classList.remove("hidden");
-
 	dadosQuizz.questions.map((pergunta) => {
 		const respostas = pergunta.answers.filter((resposta) => {
 			if (resposta.text === "") {
@@ -327,4 +320,57 @@ function enviarQuizz(url) {
 		niveis[0].minValue = 0;
 	}
 	console.log(dadosQuizz);
+	const envio = axios.post(`${URL_BASE}/quizzes`, dadosQuizz);
+	envio.then((resposta) => {
+		salvarID(resposta.data.id);
+		mostrarTelaFinal(resposta.data.id);
+	});
+	envio.catch((erro) => {
+		console.log(dadosQuizz);
+		alert(erro.response);
+		window.location.reload();
+	});
+}
+
+function salvarID(idQuizz) {
+	if (localStorage.getItem("id")) {
+		localStorage.getItem("id");
+		const id = JSON.parse(localStorage.getItem("id"));
+		id.push(idQuizz);
+		localStorage.setItem("id", JSON.stringify(id));
+	} else {
+		localStorage.setItem("id", JSON.stringify([idQuizz]));
+	}
+}
+
+function mostrarTelaFinal(idDoQuizzCriado) {
+	const telaFinal = document.querySelector(".tela-final");
+	const telaNiveis = document.querySelector(".tela-niveis");
+	telaNiveis.classList.add("hidden");
+	telaFinal.classList.remove("hidden");
+
+	telaFinal.innerHTML = `
+	<h3 class ="instrucao">Seu quizz está pronto!</h3>
+	<div onclick ="acessarQuizz(${idDoQuizzCriado.toString()})" class="container-imagem">
+		<img src="${dadosBasicosCriacao.imagem}"/>
+		<div class="sombra-imagem"></div>
+		<span>${dadosBasicosCriacao.titulo}</span>
+	</div>
+	<button onclick = "acessarQuizz(${idDoQuizzCriado.toString()})"class="botao-prosseguir">
+	<p class="texto-botao-prosseguir">
+		Acessar Quizz
+	</p></button>
+	<p class= "botao-voltar" onclick = "voltarHome()">Voltar pra Home</p>
+
+
+			
+			`;
+}
+
+function acessarQuizz(id) {
+	const telaFinal = document.querySelector(".tela-final");
+	const quizz = axios.get(`${URL_BASE}/quizzes/${id}`);
+	telaFinal.classList.add("hidden");
+	quizz.then(telaDeQuizz);
+	quizz.catch(erroAxios);
 }
