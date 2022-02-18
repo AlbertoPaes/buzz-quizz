@@ -19,9 +19,9 @@ function disporQuizes() {
         <div class="sombra-imagem"></div>
         <span>${quiz.title}</span>
 				</div>`)
-				);
-			});
-			
+		);
+	});
+
 	promessa.catch(erroAxios);
 }
 
@@ -72,7 +72,7 @@ function telaDeQuizz(resposta) {
 		  <button class="reiniciar-quizz" onclick="reiniciarQuizz(${quizzAtual.id})">
 			  Reiniciar Quizz
 		  </button>
-		  <button  id='fullReset' class="voltar-home"  onclick="voltarTela('.corpo-pagina-inicial', '.pagina-de-um-quizz')">
+		  <button class="voltar-home" onclick="voltarHome()">
 			  Voltar para home
 		  </button>
 	  </div>
@@ -86,6 +86,15 @@ function mostrarTelaDeCriacao() {
 
 	telaCriacao.classList.remove("hidden");
 	telaInicial.classList.add("hidden");
+}
+
+function reiniciarQuizz(quizzAtual) {
+	const reiniciarPagina = document.querySelector(".pagina-de-um-quizz");
+	porcentagemDeAcertos = 0;
+	totalDeRespostas = 0;
+	qtdDeAcertos = 0;
+	reiniciarPagina.remove();
+	irPraTelaQuiz(quizzAtual);
 }
 
 function voltarHome() {
@@ -109,70 +118,75 @@ function exibirRespostasQuizz(respostas, qtdDeCadaResposta) {
 	return ARRAY_RESPOSTAS;
 }
 
-function selecionarResposta(respostaSelecionada,qtdDeRespostas){
+function selecionarResposta(respostaSelecionada, qtdDeRespostas) {
 	const divPai = respostaSelecionada.parentNode;
 	const divIrmas = divPai.children;
 	const divAvo = divPai.parentNode;
 	const respostasErradas = divPai.querySelectorAll(".resposta-errada");
 	const respostaCorreta = divPai.querySelector(".resposta-correta");
-	
-	Array.from(divIrmas).forEach( (item) => {
+
+	Array.from(divIrmas).forEach((item) => {
 		item.classList.add("nao-selecionado");
 		item.removeAttribute("onclick");
 	});
-	
-	Array.from(respostasErradas).forEach( (item) => {
-		item.classList.add("vermelho");
-	})
 
-	if(respostaSelecionada.classList.contains("resposta-correta")){
+	Array.from(respostasErradas).forEach((item) => {
+		item.classList.add("vermelho");
+	});
+
+	if (respostaSelecionada.classList.contains("resposta-correta")) {
 		qtdDeAcertos++;
 	}
-	
+
 	respostaSelecionada.classList.remove("nao-selecionado");
 	respostaCorreta.classList.add("verde");
 	totalDeRespostas++;
 
-	if(totalDeRespostas === qtdDeRespostas){
-		const porcentagem = Math.round( (qtdDeAcertos/qtdDeRespostas) * 100);
+	if (totalDeRespostas === qtdDeRespostas) {
+		const porcentagem = Math.round((qtdDeAcertos / qtdDeRespostas) * 100);
 		resultadoQuizz(porcentagem);
 	}
-	
-	setTimeout(() => {
-		const pergunta = document.querySelectorAll(".container-pergunta-individual");
-		const fimDoQuizz = document.querySelector(".container-fim-do-quizz");
-		let rolagem = false;
-		let targetPergunta = 0;
 
-		window.onscroll = () => {
-			// handle the scroll event 
-			rolagem = true;
-		};
+	setTimeout(
+		() => {
+			const pergunta = document.querySelectorAll(
+				".container-pergunta-individual"
+			);
+			const fimDoQuizz = document.querySelector(".container-fim-do-quizz");
+			let rolagem = false;
+			let targetPergunta = 0;
 
-		Array.from(pergunta).forEach( (item,index) => {
-			if(item === divAvo){
-				targetPergunta = index;
+			window.onscroll = () => {
+				// handle the scroll event
+				rolagem = true;
+			};
+
+			Array.from(pergunta).forEach((item, index) => {
+				if (item === divAvo) {
+					targetPergunta = index;
+				}
+			});
+
+			if (targetPergunta + 1 < pergunta.length && !rolagem) {
+				pergunta[targetPergunta + 1].scrollIntoView();
+			} else if (!rolagem) {
+				fimDoQuizz.scrollIntoView();
 			}
-		})
-
-		if( (targetPergunta + 1) < pergunta.length && !rolagem){
-			pergunta[targetPergunta + 1].scrollIntoView();
-		} 
-		else if(!rolagem){
-			fimDoQuizz.scrollIntoView();
-		}
-	}, 2000, divAvo);
+		},
+		2000,
+		divAvo
+	);
 }
 
-function resultadoQuizz(porcentagem){
+function resultadoQuizz(porcentagem) {
 	const fimDoQuizz = document.querySelector(".container-fim-do-quizz");
 	fimDoQuizz.classList.remove("hidden");
 
 	let levelAtingido;
 	const ultimoLevel = levels.length - 1;
 
-	for(let i=ultimoLevel; i>=0; i--){
-		if(porcentagem >= levels[i].minValue){
+	for (let i = ultimoLevel; i >= 0; i--) {
+		if (porcentagem >= levels[i].minValue) {
 			levelAtingido = levels[i];
 			break;
 		}
@@ -181,7 +195,7 @@ function resultadoQuizz(porcentagem){
 	const tituloFimQuizz = fimDoQuizz.querySelector(".tituloFimQuizz");
 	tituloFimQuizz.innerHTML = `${porcentagem}% de acerto: ${levelAtingido.title}`;
 	const imagemFimQuizz = fimDoQuizz.querySelector("img");
-	imagemFimQuizz.setAttribute("src",levelAtingido.image);
+	imagemFimQuizz.setAttribute("src", levelAtingido.image);
 	const textoResultadoDoQuizz = fimDoQuizz.querySelector(".textoQuizz");
 	textoResultadoDoQuizz.innerHTML = `${levelAtingido.text}`;
 }
@@ -191,23 +205,21 @@ function embaralharRespostas() {
 }
 
 function erroAxios() {
-	alert(
-		"Houve uma falha na comunicação com o servidor"
-	);
+	alert("Houve uma falha na comunicação com o servidor");
 	window.location.reload();
 }
 
-function mostrarLoading(){
+function mostrarLoading() {
 	const telaLoading = document.querySelector(".tela-loading");
 	telaLoading.innerHTML = Loading();
 }
 
-function removerLoading(){
+function removerLoading() {
 	const telaLoading = document.querySelector(".tela-loading");
-	telaLoading.innerHTML = '';
+	telaLoading.innerHTML = "";
 }
 
-function Loading(){
+function Loading() {
 	return `
     <div class="loading">
       <?xml version="1.0" encoding="utf-8"?>

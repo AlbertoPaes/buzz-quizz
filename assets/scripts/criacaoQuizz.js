@@ -328,7 +328,6 @@ function enviarQuizz(url) {
 	envio.catch((erro) => {
 		console.log(dadosQuizz);
 		alert(erro.response);
-		window.location.reload();
 	});
 }
 
