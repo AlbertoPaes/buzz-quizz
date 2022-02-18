@@ -56,7 +56,7 @@ function telaDeQuizz(resposta) {
 		  <span>${quizzAtual.title}</span>
 	  </div>
 	  ${caixaDeRespostas}
-	  <div class="container-fim-quizz hidden">
+	  <div class="container-fim-do-quizz hidden">
 		  <div class="container-resultado" data-identifier="quizz-result">
 			  <h1 class="tituloFimQuizz" >${porcentagemDeAcertos}% de acerto: ${quizzAtual.levels[0].title}</h1>
 		  </div>
@@ -108,22 +108,47 @@ function exibirRespostasQuizz(respostas, qtdDeCadaResposta) {
 function selecionarResposta(respostaSelecionada,qtdDeRespostas){
 	const divPai = respostaSelecionada.parentNode;
 	const divIrmas = divPai.children;
-	//const divAvo = divPai.parentNode;
+	const divAvo = divPai.parentNode;
 	const respostasErradas = divPai.querySelectorAll(".resposta-errada");
-	console.log(respostasErradas);
 	const respostaCorreta = divPai.querySelector(".resposta-correta");
-
+	
 	Array.from(divIrmas).forEach( (item) => {
 		item.classList.add("nao-selecionado");
 		item.removeAttribute("onclick");
 	});
-
+	
 	Array.from(respostasErradas).forEach( (item) => {
 		item.classList.add("vermelho");
 	})
-
+	
 	respostaSelecionada.classList.remove("nao-selecionado");
 	respostaCorreta.classList.add("verde");
+	
+	
+	setTimeout(() => {
+		const pergunta = document.querySelectorAll(".container-pergunta-individual");
+		const fimDoQuizz = document.querySelector(".container-fim-do-quizz");
+		let rolagem = false;
+		let targetPergunta = 0;
+
+		window.onscroll = () => {
+			// handle the scroll event 
+			rolagem = true;
+		};
+
+		Array.from(pergunta).forEach( (item,index) => {
+			if(item === divAvo){
+				targetPergunta = index;
+			}
+		})
+
+		if(targetPergunta + 1 < pergunta.length && !rolagem){
+			pergunta[targetPergunta + 1].scrollIntoView();
+		} 
+		else if(!rolagem){
+			fimDoQuizz.scrollIntoView();
+		}
+	}, 2000, divAvo);
 }
 
 function embaralharRespostas() {

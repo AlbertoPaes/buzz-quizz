@@ -462,7 +462,7 @@
 	opacity: 0.4;
 }
 
-.container-fim-quizz {
+.container-fim-do-quizz {
 	width: 759px;
 	background-color: white;
 	display: flex;
@@ -536,6 +536,11 @@ form {
 	display: flex;
 	flex-direction: column;
 	align-items: center;
+}
+
+html {
+	scroll-behavior: smooth;
+	inset-block: center;
 }
 
 /*::::::::::Classes de Suporte::::::::::*/
