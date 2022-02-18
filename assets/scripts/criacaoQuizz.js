@@ -328,7 +328,6 @@ function enviarQuizz(url) {
 	envio.catch((erro) => {
 		console.log(dadosQuizz);
 		alert(erro.response);
-		window.location.reload();
 	});
 }
 
@@ -350,7 +349,7 @@ function mostrarTelaFinal(idDoQuizzCriado) {
 	telaFinal.classList.remove("hidden");
 
 	telaFinal.innerHTML = `
-	<h3 class ="instrucao">Seu quizz está pronto!</h3>
+	<h3 class = "instrucao">Seu quizz está pronto!</h3>
 	<div onclick ="acessarQuizz(${idDoQuizzCriado.toString()})" class="container-imagem">
 		<img src="${dadosBasicosCriacao.imagem}"/>
 		<div class="sombra-imagem"></div>

@@ -27,6 +27,7 @@
 	width: 100%;
 	height: auto;
 	margin-top: 10px;
+	background-color: #fafafa;
 }
 .criar-quizz {
 	display: flex;
@@ -88,6 +89,36 @@
 	align-items: center;
 	justify-content: center;
 }
+.container-seus-quizzes {
+	width: 1051px;
+	margin-top: 69px;
+	margin-bottom: 46px;
+}
+
+.container-seus-quizzes .container-titulo-botao {
+	display: flex;
+	margin-bottom: 13px;
+	gap: 17px;
+	align-items: center;
+}
+
+.container-seus-quizzes .container-titulo-botao p {
+	font-size: 20px;
+	font-weight: 700;
+	font-family: Roboto;
+}
+
+.container-seus-quizzes .container-titulo-botao ion-icon {
+	font-size: 30px;
+	color: #ec362d;
+}
+
+.seus-quizzes {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 15px;
+}
+
 /*::::::::::Todos os Quizzes::::::::::*/
 .todosOsQuizzes {
 	width: 1051px;
