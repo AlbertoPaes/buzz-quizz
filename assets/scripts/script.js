@@ -1,10 +1,12 @@
-const URL_BASE = "https://mock-api.driven.com.br/api/v4/buzzquizz";
+const BASE_URL = "https://mock-api.driven.com.br/api/v4/buzzquizz";
 let porcentagemDeAcertos = 0;
+let totalDeRespostas = 0;
+let qtdDeAcertos = 0;
 
 function disporQuizes() {
 	mostrarLoading();
 
-	const promessa = axios.get(`${URL_BASE}/quizzes`);
+	const promessa = axios.get(`${BASE_URL}/quizzes`);
 	promessa.then((resposta) => {
 		removerLoading();
 		const listaQuizes = resposta.data;
@@ -24,7 +26,7 @@ function disporQuizes() {
 
 function irPraTelaQuiz(id) {
 	const telaInicial = document.querySelector(".corpo-pagina-inicial");
-	const quizz = axios.get(`${URL_BASE}/quizzes/${id}`);
+	const quizz = axios.get(`${BASE_URL}/quizzes/${id}`);
 	telaInicial.classList.add("hidden");
 	quizz.then(telaDeQuizz);
 	quizz.catch(erroAxios);
@@ -44,7 +46,7 @@ function telaDeQuizz(resposta) {
 			}</h2>
 		</div>
 		<div class="container-respostas-pergunta-individual">
-		  ${exibirRespostasQuizz(item.answers, item.length)}
+		  ${exibirRespostasQuizz(item.answers, quizzAtual.questions.length)}
 		</div>        
 	  </div>`)
 	);
@@ -120,10 +122,19 @@ function selecionarResposta(respostaSelecionada,qtdDeRespostas){
 	Array.from(respostasErradas).forEach( (item) => {
 		item.classList.add("vermelho");
 	})
+
+	if(respostaSelecionada.classList.contains("resposta-correta")){
+		qtdDeAcertos++;
+	}
 	
 	respostaSelecionada.classList.remove("nao-selecionado");
 	respostaCorreta.classList.add("verde");
-	
+	totalDeRespostas++;
+
+	if(totalDeRespostas === qtdDeRespostas){
+		const porcentagem = Math.round( (qtdDeAcertos/qtdDeRespostas) * 100);
+		resultadoQuizz(porcentagem);
+	}
 	
 	setTimeout(() => {
 		const pergunta = document.querySelectorAll(".container-pergunta-individual");
@@ -142,13 +153,23 @@ function selecionarResposta(respostaSelecionada,qtdDeRespostas){
 			}
 		})
 
-		if(targetPergunta + 1 < pergunta.length && !rolagem){
+		if( (targetPergunta + 1) < pergunta.length && !rolagem){
 			pergunta[targetPergunta + 1].scrollIntoView();
 		} 
 		else if(!rolagem){
 			fimDoQuizz.scrollIntoView();
 		}
 	}, 2000, divAvo);
+}
+
+function resultadoQuizz(porcentagem){
+	const fimDoQuizz = document.querySelector(".container-fim-do-quizz");
+	fimDoQuizz.classList.remove("hidden");
+
+	const tituloFimQuizz = fimDoQuizz.querySelector(".tituloFimQuizz");
+	tituloFimQuizz.innerHTML = `${porcentagem}% de acerto:`;
+	const imagemFimQuizz = fimDoQuizz.querySelector("img");
+	const textoResultadoDoQuizz = fimDoQuizz.querySelector(".textoQuizz");
 }
 
 function embaralharRespostas() {
