@@ -72,7 +72,7 @@ function telaDeQuizz(resposta) {
 		  <button class="reiniciar-quizz" onclick="reiniciarQuizz(${quizzAtual.id})">
 			  Reiniciar Quizz
 		  </button>
-		  <button  id='fullReset' class="voltar-home"  onclick="voltarTela('.corpo-pagina-inicial', '.pagina-de-um-quizz')">
+		  <button class="voltar-home" onclick="voltarHome()">
 			  Voltar para home
 		  </button>
 	  </div>
@@ -86,6 +86,15 @@ function mostrarTelaDeCriacao() {
 
 	telaCriacao.classList.remove("hidden");
 	telaInicial.classList.add("hidden");
+}
+
+function reiniciarQuizz(quizzAtual){
+	const reiniciarPagina = document.querySelector(".pagina-de-um-quizz");
+	porcentagemDeAcertos = 0;
+	totalDeRespostas = 0;
+	qtdDeAcertos = 0;
+	reiniciarPagina.remove();
+	irPraTelaQuiz(quizzAtual);
 }
 
 function voltarHome() {
