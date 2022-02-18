@@ -2,6 +2,7 @@ const BASE_URL = "https://mock-api.driven.com.br/api/v4/buzzquizz";
 let porcentagemDeAcertos = 0;
 let totalDeRespostas = 0;
 let qtdDeAcertos = 0;
+let levels;
 
 function disporQuizes() {
 	mostrarLoading();
@@ -33,6 +34,7 @@ function irPraTelaQuiz(id) {
 }
 function telaDeQuizz(resposta) {
 	const quizzAtual = resposta.data;
+	levels = resposta.data.levels;
 	const corpo = document.querySelector("body");
 	let caixaDeRespostas = "";
 	quizzAtual.questions.map(
@@ -166,10 +168,22 @@ function resultadoQuizz(porcentagem){
 	const fimDoQuizz = document.querySelector(".container-fim-do-quizz");
 	fimDoQuizz.classList.remove("hidden");
 
+	let levelAtingido;
+	const ultimoLevel = levels.length - 1;
+
+	for(let i=ultimoLevel; i>=0; i--){
+		if(porcentagem >= levels[i].minValue){
+			levelAtingido = levels[i];
+			break;
+		}
+	}
+
 	const tituloFimQuizz = fimDoQuizz.querySelector(".tituloFimQuizz");
-	tituloFimQuizz.innerHTML = `${porcentagem}% de acerto:`;
+	tituloFimQuizz.innerHTML = `${porcentagem}% de acerto: ${levelAtingido.title}`;
 	const imagemFimQuizz = fimDoQuizz.querySelector("img");
+	imagemFimQuizz.setAttribute("src",levelAtingido.image);
 	const textoResultadoDoQuizz = fimDoQuizz.querySelector(".textoQuizz");
+	textoResultadoDoQuizz.innerHTML = `${levelAtingido.text}`;
 }
 
 function embaralharRespostas() {
