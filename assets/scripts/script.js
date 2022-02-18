@@ -14,7 +14,7 @@ function disporQuizes() {
 		const caixaQuizes = document.querySelector(".caixa-quizz");
 		listaQuizes.map(
 			(quiz) =>
-				(caixaQuizes.innerHTML += `<div class="quizzes-de-outros" onclick='irPraTelaQuiz(${quiz.id})' data-identifier="quizz-card">
+				(caixaQuizes.innerHTML += `<div class="quizzes-de-outros" onclick="irPraTelaQuiz(${quiz.id});" data-identifier="quizz-card">
         <img src="${quiz.image}"/>
         <div class="sombra-imagem"></div>
         <span>${quiz.title}</span>
@@ -26,6 +26,7 @@ function disporQuizes() {
 }
 
 function irPraTelaQuiz(id) {
+	mostrarLoading();
 	const telaInicial = document.querySelector(".corpo-pagina-inicial");
 	const quizz = axios.get(`${BASE_URL}/quizzes/${id}`);
 	telaInicial.classList.add("hidden");
@@ -33,6 +34,7 @@ function irPraTelaQuiz(id) {
 	quizz.catch(erroAxios);
 }
 function telaDeQuizz(resposta) {
+	removerLoading();
 	const quizzAtual = resposta.data;
 	levels = resposta.data.levels;
 	const corpo = document.querySelector("body");
