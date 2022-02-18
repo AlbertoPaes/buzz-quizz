@@ -22,10 +22,16 @@
 		</header>
 		<div class="corpo-pagina-inicial">
 			<div class="tela-loading"></div>
-			<!-- <div class="possui-quizz-usuario hidden">
-				<p>Seus Quizzes</p>
-				<ion-icon name="add-circle"></ion-icon>
-			</div> -->
+			<div class="container-seus-quizzes hidden">
+				<div class="container-titulo-botao">
+					<p>Seus Quizzes</p>
+					<ion-icon
+						onclick="mostrarTelaDeCriacao()"
+						name="add-circle"
+					></ion-icon>
+				</div>
+				<div class="seus-quizzes"></div>
+			</div>
 			<div class="criar-quizz" data-identifier="user-quizzes">
 				<p>Voce não criou nenhum quizz ainda :(</p>
 				<button onclick="mostrarTelaDeCriacao()" class="botao-criacao">

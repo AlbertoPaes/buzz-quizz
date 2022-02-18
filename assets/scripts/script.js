@@ -6,10 +6,10 @@ let levels;
 
 function disporQuizes() {
 	mostrarLoading();
-
 	const promessa = axios.get(`${BASE_URL}/quizzes`);
 	promessa.then((resposta) => {
 		removerLoading();
+		carregarQuizzesUsuario();
 		const listaQuizes = resposta.data;
 		const caixaQuizes = document.querySelector(".caixa-quizz");
 		listaQuizes.map(
@@ -278,4 +278,42 @@ function Loading() {
       <span>Carregando</span>
     </div>
   `;
+}
+
+function carregarQuizzesUsuario() {
+	const containerQuizzesUsuario = document.querySelector(".criar-quizz");
+	const containerSeusQuizzes = document.querySelector(
+		".container-seus-quizzes"
+	);
+	const seusQuizzes = document.querySelector(".seus-quizzes");
+	let quizzesUsuario = "";
+	if (localStorage.getItem("id")) {
+		containerQuizzesUsuario.classList.add("hidden");
+		containerSeusQuizzes.classList.remove("hidden");
+		localStorage.getItem("id");
+		const id = JSON.parse(localStorage.getItem("id"));
+		console.log(id);
+
+		id.forEach((idQuizz) => {
+			const promessa = axios.get(`${BASE_URL}/quizzes/${idQuizz.toString()}`);
+			console.log(`${BASE_URL}/quizzes/${idQuizz.toString()}`);
+			promessa.then((quizzUsuario) => {
+				console.log("sucesso");
+				quizzesUsuario += `
+				<div class="quizzes-de-outros" onclick="irPraTelaQuiz(${quizzUsuario.data.id})" data-identifier="quizz-card">
+					<img src="${quizzUsuario.data.image}"/>
+					<div class="sombra-imagem"></div>
+					<span>${quizzUsuario.data.title}</span>
+				</div>
+				`;
+				seusQuizzes.innerHTML = `
+				${quizzesUsuario}
+				
+				`;
+			});
+			promessa.catch((erro) => {
+				console.log(erro.data);
+			});
+		});
+	}
 }

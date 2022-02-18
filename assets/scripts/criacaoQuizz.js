@@ -320,7 +320,7 @@ function enviarQuizz(url) {
 		niveis[0].minValue = 0;
 	}
 	console.log(dadosQuizz);
-	const envio = axios.post(`${URL_BASE}/quizzes`, dadosQuizz);
+	const envio = axios.post(`${BASE_URL}/quizzes`, dadosQuizz);
 	envio.then((resposta) => {
 		salvarID(resposta.data.id);
 		mostrarTelaFinal(resposta.data.id);
@@ -349,7 +349,7 @@ function mostrarTelaFinal(idDoQuizzCriado) {
 	telaFinal.classList.remove("hidden");
 
 	telaFinal.innerHTML = `
-	<h3 class ="instrucao">Seu quizz está pronto!</h3>
+	<h3 class = "instrucao">Seu quizz está pronto!</h3>
 	<div onclick ="acessarQuizz(${idDoQuizzCriado.toString()})" class="container-imagem">
 		<img src="${dadosBasicosCriacao.imagem}"/>
 		<div class="sombra-imagem"></div>
@@ -368,7 +368,7 @@ function mostrarTelaFinal(idDoQuizzCriado) {
 
 function acessarQuizz(id) {
 	const telaFinal = document.querySelector(".tela-final");
-	const quizz = axios.get(`${URL_BASE}/quizzes/${id}`);
+	const quizz = axios.get(`${BASE_URL}/quizzes/${id}`);
 	telaFinal.classList.add("hidden");
 	quizz.then(telaDeQuizz);
 	quizz.catch(erroAxios);
