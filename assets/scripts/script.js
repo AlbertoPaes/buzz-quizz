@@ -286,13 +286,10 @@ function carregarQuizzesUsuario() {
 		containerSeusQuizzes.classList.remove("hidden");
 		localStorage.getItem("id");
 		const id = JSON.parse(localStorage.getItem("id"));
-		console.log(id);
 
 		id.forEach((idQuizz) => {
 			const promessa = axios.get(`${BASE_URL}/quizzes/${idQuizz.toString()}`);
-			console.log(`${BASE_URL}/quizzes/${idQuizz.toString()}`);
 			promessa.then((quizzUsuario) => {
-				console.log("sucesso");
 				quizzesUsuario += `
 				<div class="quizzes-de-outros" onclick="irPraTelaQuiz(${quizzUsuario.data.id})" data-identifier="quizz-card">
 					<img src="${quizzUsuario.data.image}"/>
@@ -304,9 +301,6 @@ function carregarQuizzesUsuario() {
 				${quizzesUsuario}
 				
 				`;
-			});
-			promessa.catch((erro) => {
-				console.log(erro.data);
 			});
 		});
 	}
