@@ -530,12 +530,14 @@
 	color: white;
 	margin-bottom: 20px;
 	margin-top: 50px;
+	border: none;
 }
 
 .voltar-home {
 	background-color: transparent;
 	color: #818181;
 	font-size: 21px;
+	border: none;
 }
 
 /*::::::::::Estilos Gerais::::::::::*/
