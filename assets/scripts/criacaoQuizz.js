@@ -1,15 +1,76 @@
 let dadosBasicosCriacao;
 let dadosQuizz;
-let listaIds = [];
+
+function mostrarTelaDeCriacao() {
+	const telaInicial = document.querySelector(".corpo-pagina-inicial");
+	const telaCriacao = document.querySelector(".tela-infos-basicas");
+
+	telaCriacao.classList.remove("hidden");
+	telaInicial.classList.add("hidden");
+
+	telaCriacao.innerHTML = ` 
+	<p class="instrucao">Comece pelo começo</p>
+	<div class="conteudo-criacao">
+		<form
+			onsubmit="verificarCriacao_1(); return false"
+			accept-charset="utf-8"
+			name="info-basica"
+		>
+			<div class="dados-quizz_1">
+				<input
+					placeholder="Título do seu quizz"
+					id="criacao-titulo"
+					name="titulo_quizz"
+					type="text"
+					maxlength="65"
+					minlength="20"
+					required
+				/>
+				<input
+					placeholder="URL da imagem do seu quizz"
+					id="criacao-img"
+					name="imagem_quizz"
+					type="url"
+					required
+				/>
+				<input
+					placeholder="Quantidade de perguntas do quizz"
+					id="criacao-quantidade-perguntas"
+					name="perguntas_quizz"
+					type="number"
+					min="3"
+					required
+				/>
+				<input
+					placeholder="Quantidade de níveis do quizz"
+					id="criacao-quantidade-niveis"
+					name="niveis_quizz"
+					type="number"
+					min="2"
+					required
+				/>
+			</div>
+
+			<button type="submit" class="botao-prosseguir">
+				<p class="texto-botao-prosseguir">
+					Prosseguir para criar perguntas
+				</p>
+			</button>
+		</form>
+	
+	
+	
+	`;
+}
 
 function verificarCriacao_1() {
-	const criacaoQuizzTitulo = document.querySelector(".criacao-titulo").value;
-	const criacaoQuizzImg = document.querySelector(".criacao-img").value;
+	const criacaoQuizzTitulo = document.querySelector("#criacao-titulo").value;
+	const criacaoQuizzImg = document.querySelector("#criacao-img").value;
 	const criacaoQuizzQtdPerguntas = document.querySelector(
-		".criacao-quantidade-perguntas"
+		"#criacao-quantidade-perguntas"
 	).value;
 	const criacaoQuizzQtdNiveis = document.querySelector(
-		".criacao-quantidade-niveis"
+		"#criacao-quantidade-niveis"
 	).value;
 	dadosQuizz = {
 		title: criacaoQuizzTitulo,
@@ -42,19 +103,15 @@ function mostrarTelaDePerguntas(perguntas) {
 			<h3>Pergunta ${i + 1}</h3>
 			<ion-icon class = "pencil" name="create-outline"></ion-icon>
 			<div class = "container-form-perguntas hidden">
-				<div class = "pergunta caixa-input-pergunta">
+				<div class = "pergunta">
 					<input 
 						placeholder = "Texto da pergunta"
-						id = "input-box"
-						class="texto-pergunta caixa-input-pergunta"
 						name = "texto_pergunta"
 						minlenght = "20"
 						required
 					/>
 					<input 
-						placeholder = "Qual a cor de fundo da pergunta"
-						id = "input-box"
-						class="cor-de-fundo-pergunta caixa-input-pergunta"
+						placeholder = "Cor de fundo da pergunta"
 						name = "cor_de_fundo_pergunta"
 						type = "text"
 						pattern = "^#([A-Fa-f0-9]{6}|[A-Fa-f0-9]{3})$"
@@ -62,11 +119,9 @@ function mostrarTelaDePerguntas(perguntas) {
 					/>
 				</div>
 				<h3>Resposta correta</h3>
-				<div class = "resposta-correta caixa-input-pergunta">
+				<div class = "resposta-correta">
 					<input
 						placeholder = "Resposta Correta"
-						id = "input-box"
-						class="texto-resposta-correta " 
 						name = "texto_resposta_correta"
 						type = "text"
 						minlenght = "1"
@@ -74,8 +129,6 @@ function mostrarTelaDePerguntas(perguntas) {
 					/>
 					<input
 						placeholder = "URL da imagem"
-						id = "input-box"
-						class="url-img-resposta-correta"
 						name = "url_img_resposta_correta"
 						type = "url"
 						required
@@ -84,7 +137,7 @@ function mostrarTelaDePerguntas(perguntas) {
 
 				<h3>Respostas incorretas</h3>
 				<div class = "respostas-incorretas">
-					<div class ="resposta-incorreta caixa-input-pergunta">
+					<div class ="resposta-incorreta">
 						<input
 							placeholder = "Resposta incorreta 1"
 							id = "texto-resposta-incorreta1"
@@ -94,7 +147,7 @@ function mostrarTelaDePerguntas(perguntas) {
 							required
 						/>
 						<input
-							placeholder = "URL da imagem"
+							placeholder = "URL da imagem 1"
 							id = "url-img-resposta-incorreta1"
 							name = "url_img_resposta_incorreta1"
 							type = "url"
@@ -102,9 +155,9 @@ function mostrarTelaDePerguntas(perguntas) {
 						/>
 					</div>
 
-					<div class ="resposta-incorreta caixa-input-pergunta">
+					<div class ="resposta-incorreta">
 						<input
-							placeholder = "Resposta inorreta 2"
+							placeholder = "Resposta incorreta 2"
 							id = "texto-resposta-incorreta2"
 							name = "texto_resposta_incorreta2"
 							type = "text"
@@ -112,7 +165,7 @@ function mostrarTelaDePerguntas(perguntas) {
 							
 						/>
 						<input
-							placeholder = "URL da imagem"
+							placeholder = "URL da imagem 2"
 							id = "url-img-resposta-incorreta2"
 							name = "url_img_resposta_incorreta2"
 							type = "url"
@@ -120,7 +173,7 @@ function mostrarTelaDePerguntas(perguntas) {
 						/>
 					</div>
 
-					<div class ="resposta-incorreta caixa-input-pergunta">
+					<div class ="resposta-incorreta">
 						<input
 							placeholder = "Resposta incorreta 3"
 							id = "texto-resposta-incorreta3"
@@ -130,7 +183,7 @@ function mostrarTelaDePerguntas(perguntas) {
 							
 						/>
 						<input
-							placeholder = "URL da imagem"
+							placeholder = "URL da imagem 3"
 							id = "url-img-resposta-incorreta3"
 							name = "url_img_resposta_incorreta3"
 							type = "url"

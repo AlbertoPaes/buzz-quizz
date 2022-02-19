@@ -82,14 +82,6 @@ function telaDeQuizz(resposta) {
 	`;
 }
 
-function mostrarTelaDeCriacao() {
-	const telaInicial = document.querySelector(".corpo-pagina-inicial");
-	const telaCriacao = document.querySelector(".tela-infos-basicas");
-
-	telaCriacao.classList.remove("hidden");
-	telaInicial.classList.add("hidden");
-}
-
 function reiniciarQuizz(quizzAtual) {
 	const reiniciarPagina = document.querySelector(".pagina-de-um-quizz");
 	porcentagemDeAcertos = 0;
