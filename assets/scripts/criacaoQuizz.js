@@ -304,6 +304,7 @@ function verificarNiveis() {
 }
 
 function enviarQuizz(url) {
+	mostrarLoading();
 	dadosQuizz.questions.map((pergunta) => {
 		const respostas = pergunta.answers.filter((resposta) => {
 			if (resposta.text === "") {
@@ -322,6 +323,7 @@ function enviarQuizz(url) {
 	console.log(dadosQuizz);
 	const envio = axios.post(`${BASE_URL}/quizzes`, dadosQuizz);
 	envio.then((resposta) => {
+		removerLoading();
 		salvarID(resposta.data.id);
 		mostrarTelaFinal(resposta.data.id);
 	});
@@ -367,6 +369,7 @@ function mostrarTelaFinal(idDoQuizzCriado) {
 }
 
 function acessarQuizz(id) {
+	mostrarLoading();
 	const telaFinal = document.querySelector(".tela-final");
 	const quizz = axios.get(`${BASE_URL}/quizzes/${id}`);
 	telaFinal.classList.add("hidden");
