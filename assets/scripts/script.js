@@ -41,7 +41,7 @@ function telaDeQuizz(resposta) {
 	let caixaDeRespostas = "";
 	quizzAtual.questions.map(
 		(item) =>
-			(caixaDeRespostas += `<div class="container-pergunta-individual">
+			(caixaDeRespostas += `<div class="container-pergunta-individual" data-identifier="question">
 		<div class="container-titulo-pergunta-individual" style="background-color: ${
 			item.color
 		};">
@@ -75,7 +75,7 @@ function telaDeQuizz(resposta) {
 			  Reiniciar Quizz
 		  </button>
 		  <button class="voltar-home" onclick="voltarHome()">
-			  Voltar para home
+			  Voltar pra home
 		  </button>
 	  </div>
 	</div> 
@@ -108,7 +108,7 @@ function exibirRespostasQuizz(respostas, qtdDeCadaResposta) {
 
 	respostas.forEach((item) => {
 		ARRAY_RESPOSTAS.push(
-			`<div class="container-resposta-indivual ${
+			`<div class="container-resposta-individual ${
 				item.isCorrectAnswer === true ? "resposta-correta" : "resposta-errada"
 			}     "onclick="selecionarResposta(this, ${qtdDeCadaResposta})" data-identifier="answer">
             <img src="${item.image}"/>

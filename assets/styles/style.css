@@ -153,6 +153,7 @@
 	width: 100%;
 	height: 100%;
 	border-radius: 5px;
+	cursor: pointer;
 }
 .sombra-imagem {
 	width: 100%;
@@ -474,17 +475,18 @@
 	align-items: space-between;
 }
 
-.container-resposta-indivual {
+.container-resposta-individual {
 	width: 330px;
 	height: 200px;
 }
 
-.container-resposta-indivual img {
+.container-resposta-individual img {
 	width: 330px;
 	height: 175px;
+	cursor: pointer;
 }
 
-.container-resposta-indivual span {
+.container-resposta-individual span {
 	color: inherit;
 	font-weight: 700;
 }
