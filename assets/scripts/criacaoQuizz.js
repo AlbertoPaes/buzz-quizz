@@ -88,7 +88,6 @@ function verificarCriacao_1() {
 }
 
 function mostrarTelaDePerguntas(perguntas) {
-	console.log(perguntas);
 	const telaPerguntas = document.querySelector(".tela-perguntas");
 	const telaCriacao = document.querySelector(".tela-infos-basicas");
 
@@ -238,11 +237,8 @@ function editar(div) {
 }
 
 function verificarPerguntas() {
-	console.log("entrou");
 	const perguntas = [...document.querySelectorAll(".container-form-perguntas")];
-	console.log(perguntas);
 	perguntas.forEach((divPergunta) => {
-		console.log(divPergunta.children[0].children[0].value);
 		const dadosPerguntas = {
 			title: divPergunta.children[0].children[0].value,
 			color: divPergunta.children[0].children[1].value,
@@ -276,7 +272,6 @@ function verificarPerguntas() {
 }
 
 function mostrarTelaDeNiveis(niveis) {
-	console.log(niveis);
 	const telaPerguntas = document.querySelector(".tela-perguntas");
 	const telaNiveis = document.querySelector(".tela-niveis");
 	telaPerguntas.classList.add("hidden");
@@ -284,7 +279,6 @@ function mostrarTelaDeNiveis(niveis) {
 
 	let containerNiveis = "";
 	for (let i = 0; i < parseInt(niveis); i++) {
-		console.log(i + 1);
 		containerNiveis += `
 		<div class="caixa-adicao" onclick="editar(this)" data-identifier="expand">
 			<h3>Nivel ${i + 1}</h3>
@@ -373,7 +367,7 @@ function enviarQuizz(url) {
 	if (niveis[0].minValue !== 0) {
 		niveis[0].minValue = 0;
 	}
-	console.log(dadosQuizz);
+
 	const envio = axios.post(`${BASE_URL}/quizzes`, dadosQuizz);
 	envio.then((resposta) => {
 		removerLoading();
@@ -381,8 +375,8 @@ function enviarQuizz(url) {
 		mostrarTelaFinal(resposta.data.id);
 	});
 	envio.catch((erro) => {
-		console.log(dadosQuizz);
 		alert(erro.response);
+		window.location.reload();
 	});
 }
 
