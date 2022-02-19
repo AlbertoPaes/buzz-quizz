@@ -99,11 +99,11 @@ function mostrarTelaDePerguntas(perguntas) {
 
 	for (let i = 0; i < parseInt(perguntas); i++) {
 		containerPerguntas += `
-		<div class="caixa-adicao" onclick="editar(this)">
+		<div class="caixa-adicao" onclick="editar(this)" data-identifier="expand">
 			<h3>Pergunta ${i + 1}</h3>
 			<ion-icon class = "pencil" name="create-outline"></ion-icon>
 			<div class = "container-form-perguntas hidden">
-				<div class = "pergunta">
+				<div class = "pergunta"  data-identifier="question">
 					<input 
 						placeholder = "Texto da pergunta"
 						name = "texto_pergunta"
@@ -212,7 +212,7 @@ function mostrarTelaDePerguntas(perguntas) {
 		
 			<button type="submit" class="botao-prosseguir">
 				<p class="texto-botao-prosseguir">
-					Prosseguir para criar níveis
+					Prosseguir pra criar níveis
 				</p>
 			</button>
 		</form>
@@ -286,11 +286,11 @@ function mostrarTelaDeNiveis(niveis) {
 	for (let i = 0; i < parseInt(niveis); i++) {
 		console.log(i + 1);
 		containerNiveis += `
-		<div class="caixa-adicao" onclick="editar(this)">
+		<div class="caixa-adicao" onclick="editar(this)" data-identifier="expand">
 			<h3>Nivel ${i + 1}</h3>
 			<ion-icon class = "pencil" name="create-outline"></ion-icon>
 			<div class = "container-form hidden">
-				<div class = "caixa-input">
+				<div class = "caixa-input" data-identifier="level">
 					<input 
 						placeholder = "Titulo do nível"
 						id = "titulo-nivel"
@@ -414,11 +414,8 @@ function mostrarTelaFinal(idDoQuizzCriado) {
 	<p class="texto-botao-prosseguir">
 		Acessar Quizz
 	</p></button>
-	<p class= "botao-voltar" onclick = "voltarHome()">Voltar pra Home</p>
-
-
-			
-			`;
+	<p class= "botao-voltar" onclick = "voltarHome()">Voltar pra home</p>	
+	`;
 }
 
 function acessarQuizz(id) {

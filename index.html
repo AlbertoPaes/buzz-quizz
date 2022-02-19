@@ -28,13 +28,18 @@
 					<ion-icon
 						onclick="mostrarTelaDeCriacao()"
 						name="add-circle"
+						data-identifier="create-quizz"
 					></ion-icon>
 				</div>
 				<div class="seus-quizzes"></div>
 			</div>
 			<div class="criar-quizz" data-identifier="user-quizzes">
 				<p>Voce não criou nenhum quizz ainda :(</p>
-				<button onclick="mostrarTelaDeCriacao()" class="botao-criacao">
+				<button
+					onclick="mostrarTelaDeCriacao()"
+					class="botao-criacao"
+					data-identifier="create-quizz"
+				>
 					Criar Quizz
 				</button>
 			</div>
