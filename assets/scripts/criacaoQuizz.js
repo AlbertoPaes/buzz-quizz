@@ -200,8 +200,8 @@ function mostrarTelaDePerguntas(perguntas) {
 	}
 
 	telaPerguntas.innerHTML += `
-	<p class = "instrucao">Crie suas perguntas</p>
-	<div class = "conteudo-criacao">
+	<p class="instrucao">Crie suas perguntas</p>
+	<div class="conteudo-criacao">
 		<form
 		onsubmit = "verificarPerguntas(); return false"
 		accept-charset="utf-8"
@@ -309,7 +309,7 @@ function mostrarTelaDeNiveis(niveis) {
 						type = "url"
 						required
 					/>
-					<textarea class ="descricao" placeholder = "Descrição do nível" id = "descricao-nivel" name = "descricao_nivel" minlength = "30"  type = "text" required></textarea>
+					<textarea class="descricao" placeholder = "Descrição do nível" id = "descricao-nivel" name = "descricao_nivel" minlength = "30"  type = "text" required></textarea>
 				
 				</div>
 			</div>
@@ -318,8 +318,8 @@ function mostrarTelaDeNiveis(niveis) {
 	}
 
 	telaNiveis.innerHTML = `
-	<p class = "instrucao">Agora, decida os níveis!</p>
-	<div class = "conteudo-criacao">
+	<p class="instrucao">Agora, decida os níveis!</p>
+	<div class="conteudo-criacao">
 		<form
 		onsubmit = "verificarNiveis(); return false"
 		accept-charset="utf-8"
@@ -398,7 +398,7 @@ function mostrarTelaFinal(idDoQuizzCriado) {
 	telaFinal.classList.remove("hidden");
 
 	telaFinal.innerHTML = `
-	<h3 class = "instrucao">Seu quizz está pronto!</h3>
+	<h3 class="instrucao">Seu quizz está pronto!</h3>
 	<div onclick ="acessarQuizz(${idDoQuizzCriado.toString()})" class="container-imagem">
 		<img src="${dadosBasicosCriacao.imagem}"/>
 		<div class="sombra-imagem"></div>
@@ -408,7 +408,7 @@ function mostrarTelaFinal(idDoQuizzCriado) {
 	<p class="texto-botao-prosseguir">
 		Acessar Quizz
 	</p></button>
-	<p class= "botao-voltar" onclick = "voltarHome()">Voltar pra home</p>	
+	<p class="botao-voltar" onclick = "voltarHome()">Voltar pra home</p>	
 	`;
 }
 

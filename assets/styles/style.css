@@ -99,7 +99,7 @@
 }
 
 /*::::::::::Todos os Quizzes::::::::::*/
-.todosOsQuizzes {
+.todos-os-quizzes {
 	width: 1050px;
 
 	text-align: left;
@@ -625,7 +625,7 @@ input[type="number"] {
 		cursor: pointer;
 	}
 
-	.todosOsQuizzes {
+	.todos-os-quizzes {
 		width: 90%;
 	}
 
