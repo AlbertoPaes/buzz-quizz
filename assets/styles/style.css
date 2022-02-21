@@ -515,7 +515,7 @@
 .imagem-e-descricao .textoQuizz {
 	width: auto;
 	padding: 21px;
-	word-break: normal;
+	word-break: break-all;
 }
 
 .reiniciar-quizz {
