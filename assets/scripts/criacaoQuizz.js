@@ -118,7 +118,7 @@ function mostrarTelaDePerguntas(perguntas) {
 					/>
 				</div>
 				<h3>Resposta correta</h3>
-				<div class = "resposta-correta">
+				<div class = "resposta-certa">
 					<input
 						placeholder = "Resposta Correta"
 						name = "texto_resposta_correta"
