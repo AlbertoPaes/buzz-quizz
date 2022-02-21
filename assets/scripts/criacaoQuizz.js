@@ -5,8 +5,8 @@ function mostrarTelaDeCriacao() {
 	const telaInicial = document.querySelector(".corpo-pagina-inicial");
 	const telaCriacao = document.querySelector(".tela-infos-basicas");
 
-	telaCriacao.classList.remove("hidden");
-	telaInicial.classList.add("hidden");
+	telaCriacao.classList.remove("escondido");
+	telaInicial.classList.add("escondido");
 
 	telaCriacao.innerHTML = ` 
 	<p class="instrucao">Comece pelo começo</p>
@@ -91,8 +91,8 @@ function mostrarTelaDePerguntas(perguntas) {
 	const telaPerguntas = document.querySelector(".tela-perguntas");
 	const telaCriacao = document.querySelector(".tela-infos-basicas");
 
-	telaPerguntas.classList.remove("hidden");
-	telaCriacao.classList.add("hidden");
+	telaPerguntas.classList.remove("escondido");
+	telaCriacao.classList.add("escondido");
 
 	let containerPerguntas = "";
 
@@ -101,7 +101,7 @@ function mostrarTelaDePerguntas(perguntas) {
 		<div class="caixa-adicao" onclick="editar(this)" data-identifier="expand">
 			<h3>Pergunta ${i + 1}</h3>
 			<ion-icon class = "pencil" name="create-outline"></ion-icon>
-			<div class = "container-form-perguntas hidden">
+			<div class = "container-form-perguntas escondido">
 				<div class = "pergunta"  data-identifier="question">
 					<input 
 						placeholder = "Texto da pergunta"
@@ -226,13 +226,13 @@ function editar(div) {
 	const ativo = document.querySelector(".ativo");
 	if (ativo !== null) {
 		ativo.classList.remove("ativo");
-		ativo.children[1].classList.remove("hidden");
-		ativo.children[2].classList.add("hidden");
+		ativo.children[1].classList.remove("escondido");
+		ativo.children[2].classList.add("escondido");
 		ativo.children[0].classList.remove("margem");
 	}
 	div.children[0].classList.add("margem");
-	div.children[1].classList.add("hidden");
-	div.children[2].classList.remove("hidden");
+	div.children[1].classList.add("escondido");
+	div.children[2].classList.remove("escondido");
 	div.classList.add("ativo");
 }
 
@@ -274,8 +274,8 @@ function verificarPerguntas() {
 function mostrarTelaDeNiveis(niveis) {
 	const telaPerguntas = document.querySelector(".tela-perguntas");
 	const telaNiveis = document.querySelector(".tela-niveis");
-	telaPerguntas.classList.add("hidden");
-	telaNiveis.classList.remove("hidden");
+	telaPerguntas.classList.add("escondido");
+	telaNiveis.classList.remove("escondido");
 
 	let containerNiveis = "";
 	for (let i = 0; i < parseInt(niveis); i++) {
@@ -283,7 +283,7 @@ function mostrarTelaDeNiveis(niveis) {
 		<div class="caixa-adicao" onclick="editar(this)" data-identifier="expand">
 			<h3>Nivel ${i + 1}</h3>
 			<ion-icon class = "pencil" name="create-outline"></ion-icon>
-			<div class = "container-form hidden">
+			<div class = "container-form escondido">
 				<div class = "caixa-input" data-identifier="level">
 					<input 
 						placeholder = "Titulo do nível"
@@ -394,8 +394,8 @@ function salvarID(idQuizz) {
 function mostrarTelaFinal(idDoQuizzCriado) {
 	const telaFinal = document.querySelector(".tela-final");
 	const telaNiveis = document.querySelector(".tela-niveis");
-	telaNiveis.classList.add("hidden");
-	telaFinal.classList.remove("hidden");
+	telaNiveis.classList.add("escondido");
+	telaFinal.classList.remove("escondido");
 
 	telaFinal.innerHTML = `
 	<h3 class="instrucao">Seu quizz está pronto!</h3>
@@ -416,7 +416,7 @@ function acessarQuizz(id) {
 	mostrarLoading();
 	const telaFinal = document.querySelector(".tela-final");
 	const quizz = axios.get(`${BASE_URL}/quizzes/${id}`);
-	telaFinal.classList.add("hidden");
+	telaFinal.classList.add("escondido");
 	quizz.then(telaDeQuizz);
 	quizz.catch(erroAxios);
 }

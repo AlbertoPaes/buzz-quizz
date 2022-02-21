@@ -36,7 +36,7 @@
 	flex-wrap: wrap;
 	justify-content: center;
 	align-items: center;
-	width: 70%;
+	width: 1050px;
 	height: 181px;
 	border-radius: 5px;
 	border: 1px dashed #d5d5d5;
@@ -559,7 +559,7 @@ html {
 }
 
 /*::::::::::Classes de Suporte::::::::::*/
-.hidden {
+.escondido {
 	display: none;
 }
 
@@ -666,7 +666,7 @@ input[type="number"] {
 		justify-content: space-between;
 		padding: 0 25px;
 	}
-	.hidden {
+	.escondido {
 		display: none;
 	}
 
