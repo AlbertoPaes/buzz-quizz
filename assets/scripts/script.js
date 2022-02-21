@@ -29,7 +29,7 @@ function irPraTelaQuiz(id) {
 	mostrarLoading();
 	const telaInicial = document.querySelector(".corpo-pagina-inicial");
 	const quizz = axios.get(`${BASE_URL}/quizzes/${id}`);
-	telaInicial.classList.add("hidden");
+	telaInicial.classList.add("escondido");
 	quizz.then(telaDeQuizz);
 	quizz.catch(erroAxios);
 }
@@ -62,7 +62,7 @@ function telaDeQuizz(resposta) {
 		  <span>${quizzAtual.title}</span>
 	  </div>
 	  ${caixaDeRespostas}
-	  <div class="container-fim-do-quizz hidden">
+	  <div class="container-fim-do-quizz escondido">
 		  <div class="container-resultado" data-identifier="quizz-result">
 			  <h1 class="tituloFimQuizz" >${porcentagemDeAcertos}% de acerto: ${quizzAtual.levels[0].title}</h1>
 		  </div>
@@ -174,7 +174,7 @@ function selecionarResposta(respostaSelecionada, qtdDeRespostas) {
 
 function resultadoQuizz(porcentagem) {
 	const fimDoQuizz = document.querySelector(".container-fim-do-quizz");
-	fimDoQuizz.classList.remove("hidden");
+	fimDoQuizz.classList.remove("escondido");
 
 	let levelAtingido;
 	const ultimoLevel = levels.length - 1;
@@ -282,8 +282,8 @@ function carregarQuizzesUsuario() {
 	const seusQuizzes = document.querySelector(".seus-quizzes");
 	let quizzesUsuario = "";
 	if (localStorage.getItem("id")) {
-		containerQuizzesUsuario.classList.add("hidden");
-		containerSeusQuizzes.classList.remove("hidden");
+		containerQuizzesUsuario.classList.add("escondido");
+		containerSeusQuizzes.classList.remove("escondido");
 		localStorage.getItem("id");
 		const id = JSON.parse(localStorage.getItem("id"));
 
