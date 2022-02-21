@@ -39,9 +39,9 @@ function telaDeQuizz(resposta) {
 	levels = resposta.data.levels;
 	const corpo = document.querySelector("body");
 	let caixaDeRespostas = "";
-	quizzAtual.questions.map(
+	quizzAtual.questions.forEach(
 		(item) =>
-			(caixaDeRespostas += `<div class="container-pergunta-individual" data-identifier="question">
+		(caixaDeRespostas += `<div class="container-pergunta-individual" data-identifier="question">
 		<div class="container-titulo-pergunta-individual" style="background-color: ${
 			item.color
 		};">
@@ -50,7 +50,7 @@ function telaDeQuizz(resposta) {
 			}</h2>
 		</div>
 		<div class="container-respostas-pergunta-individual">
-		  ${exibirRespostasQuizz(item.answers, quizzAtual.questions.length)}
+		  ${exibirRespostasQuizz(item.answers, quizzAtual.questions.length).join('')}
 		</div>        
 	  </div>`)
 	);
